@@ -1,0 +1,32 @@
+syntax = "proto3";
+package proxy;
+import "github.com/cjongseok/mtproto/types.tl.proto";
+
+message Update {
+	oneof Value {
+		mtproto.PredUpdatesState UpdatesState = 1;
+		mtproto.PredUpdateShortMessage UpdateShortMessage = 2;
+		mtproto.PredUpdateShortChatMessage UpdateShortChatMessage = 3;
+		mtproto.PredUpdateShort UpdateShort = 4;
+		mtproto.PredUpdates Updates = 5;
+		mtproto.PredUpdateShortSentMessage UpdateShortSentMessage = 6;
+		mtproto.PredUpdatesDifference UpdatesDifference = 7;
+		mtproto.PredUpdatesDifferenceSlice UpdatesDifferenceSlice = 8;
+		mtproto.PredUpdateNewMessage UpdateNewMessage = 9;
+		mtproto.PredUpdateReadMessagesContents UpdateReadMessagesContents = 10;
+		mtproto.PredUpdateDeleteMessages UpdateDeleteMessages = 11;
+		mtproto.PredUpdateNewEncryptedMessage UpdateNewEncryptedMessage = 12;
+		mtproto.PredUpdateChannel UpdateChannel = 13;
+		mtproto.PredUpdateChannelMessageViews UpdateChannelMessageViews = 14;
+		mtproto.PredUpdateChannelTooLong UpdateChannelTooLong = 15;
+		mtproto.PredUpdateReadChannelInbox UpdateReadChannelInbox = 16;
+		mtproto.PredUpdateReadChannelOutbox UpdateReadChannelOutbox = 17;
+		mtproto.PredUpdateNewChannelMessage UpdateNewChannelMessage = 18;
+	}
+}
+
+message ListenRequest {}
+
+service UpdateStreamer {
+	rpc ListenOnUpdates (ListenRequest) returns (stream Update) {}
+}
